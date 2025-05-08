@@ -1,6 +1,7 @@
 package hackathon.repository;
 
 import hackathon.models.dao.Post;
+import hackathon.models.enums.PostType;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,4 +12,6 @@ public interface PostRepository extends MongoRepository<Post, String> {
     List<Post> findByIsPostActiveTrue();
 
     Post findByIdAndIsPostActiveTrue(String id);
+
+    List<Post> findByTypeAndIsPostActiveTrue(PostType type);
 }

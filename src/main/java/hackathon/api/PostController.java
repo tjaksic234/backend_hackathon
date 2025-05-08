@@ -1,6 +1,7 @@
 package hackathon.api;
 
 import hackathon.models.dao.Post;
+import hackathon.models.enums.PostType;
 import hackathon.service.PostService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +24,16 @@ public class PostController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Post>> getAllPosts() {
+    public ResponseEntity<List<Post>> getAllPosts(@RequestParam(required = false) String type) {
+        if (type != null && !type.isEmpty()) {
+            try {
+                PostType postType = PostType.valueOf(type.toUpperCase());
+                return ResponseEntity.ok(postService.getPostsByType(postType));
+            } catch (IllegalArgumentException e) {
+                log.error("Invalid post type: {}", type, e);
+                return ResponseEntity.badRequest().build();
+            }
+        }
         return ResponseEntity.ok(postService.getAllPosts());
     }
 

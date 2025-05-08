@@ -3,6 +3,7 @@ package hackathon.service.impl;
 import hackathon.exceptions.BadRequestException;
 import hackathon.models.dao.Post;
 import hackathon.models.dao.User;
+import hackathon.models.enums.PostType;
 import hackathon.repository.PostRepository;
 import hackathon.repository.UserRepository;
 import hackathon.service.PostService;
@@ -66,6 +67,11 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post getPostById(String id) {
         return postRepository.findByIdAndIsPostActiveTrue(id);
+    }
+
+    @Override
+    public List<Post> getPostsByType(PostType postType) {
+        return postRepository.findByTypeAndIsPostActiveTrue(postType);
     }
 
     @Override
