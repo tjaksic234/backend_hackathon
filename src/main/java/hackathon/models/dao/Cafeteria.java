@@ -1,6 +1,5 @@
 package hackathon.models.dao;
 
-import hackathon.models.enums.MenuType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,26 +8,26 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
-@Document(collection = "menus")
+@Document(collection = "cafeterias")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Menu {
+public class Cafeteria {
 
     @Id
     private String id;
 
     private String name;
 
-    private MenuType menuType;
+    private LocalDateTime workingTime;
 
-    private LocalDate date;
+    private String address;
 
-    private List<String> foodIds;
+    private int streetNumber;
+
+    private String city;
 
     @CreatedDate
     private LocalDateTime createdAt;

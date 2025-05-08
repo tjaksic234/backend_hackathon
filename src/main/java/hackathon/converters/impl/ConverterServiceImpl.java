@@ -1,9 +1,11 @@
 package hackathon.converters.impl;
 
 import hackathon.converters.ConverterService;
+import hackathon.models.dao.Cafeteria;
 import hackathon.models.dao.Food;
 import hackathon.models.dao.Menu;
 import hackathon.models.dao.User;
+import hackathon.models.dto.CafeteriaDTO;
 import hackathon.models.dto.FoodDTO;
 import hackathon.models.dto.MenuDTO;
 import hackathon.models.dto.UserDTO;
@@ -45,5 +47,17 @@ public class ConverterServiceImpl implements ConverterService {
         menuDTO.setDate(menu.getDate());
         menuDTO.setFoodIds(menu.getFoodIds());
         return menuDTO;
+    }
+
+    @Override
+    public CafeteriaDTO convertCafeteriaToCafeteriaDTO(Cafeteria cafe) {
+        CafeteriaDTO cafeteriaDTO = new CafeteriaDTO();
+        cafeteriaDTO.setCafeteriaId(cafe.getId());
+        cafeteriaDTO.setName(cafe.getName());
+        cafeteriaDTO.setWorkingTime(cafe.getWorkingTime());
+        cafeteriaDTO.setAddress(cafe.getAddress());
+        cafeteriaDTO.setStreetNumber(cafe.getStreetNumber());
+        cafeteriaDTO.setCity(cafe.getCity());
+        return cafeteriaDTO;
     }
 }
