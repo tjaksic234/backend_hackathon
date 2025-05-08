@@ -2,8 +2,10 @@ package hackathon.converters.impl;
 
 import hackathon.converters.ConverterService;
 import hackathon.models.dao.Food;
+import hackathon.models.dao.Menu;
 import hackathon.models.dao.User;
 import hackathon.models.dto.FoodDTO;
+import hackathon.models.dto.MenuDTO;
 import hackathon.models.dto.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,5 +35,15 @@ public class ConverterServiceImpl implements ConverterService {
         foodDTO.setFoodType(food.getFoodType());
         foodDTO.setAllergies(food.getAllergies());
         return foodDTO;
+    }
+
+    @Override
+    public MenuDTO convertMenuToMenuDTO(Menu menu) {
+        MenuDTO menuDTO = new MenuDTO();
+        menuDTO.setName(menu.getName());
+        menuDTO.setMenuType(menu.getMenuType());
+        menuDTO.setDate(menu.getDate());
+        menuDTO.setFoodIds(menu.getFoodIds());
+        return menuDTO;
     }
 }
