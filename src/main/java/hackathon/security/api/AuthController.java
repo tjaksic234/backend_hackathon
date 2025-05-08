@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static hackathon.security.utils.Constants.API_ROUTE;
+
 @RestController
 @AllArgsConstructor
 @Slf4j
-@RequestMapping( "api/auth")
+@RequestMapping(API_ROUTE + "/auth")
 public class AuthController {
 
     private final AuthService authService;

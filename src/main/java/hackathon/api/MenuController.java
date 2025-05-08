@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static hackathon.security.utils.Constants.API_ROUTE;
+
 @RestController
 @AllArgsConstructor
 @Slf4j
-@RequestMapping( "api/menus")
+@RequestMapping(API_ROUTE + "/menus")
 public class MenuController {
 
     private final MenuService menuService;
