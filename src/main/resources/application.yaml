@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: Hackathon UNIZD
+    version: 1.0
+  config:
+    import: optional:file:.env[.properties]
+  data:
+    mongodb:
+      uri: ${SPRING_MONGODB_URI}
+  jwt:
+    cookie-name: ${JWT_COOKIE_NAME}
+    secret: ${JWT_SECRET}
+    expiration-ms: ${JWT_EXPIRATION_MS}
