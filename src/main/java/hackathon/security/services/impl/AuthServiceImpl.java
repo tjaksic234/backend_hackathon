@@ -99,4 +99,13 @@ public class AuthServiceImpl implements AuthService {
         }
         return false;
     }
+
+    @Override
+    public UserDTO fetchMe() {
+        User user = userRepository.findById(Helper.getLoggedInUserId())
+                .orElseThrow(() -> new NotFoundException("Error: User not found"));
+
+        log.info("Fetched me: {}", user.getId());
+        return converterService.convertUserToUserDTO(user);
+    }
 }

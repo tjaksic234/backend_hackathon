@@ -10,4 +10,5 @@ public interface AuthService {
     UserDTO register(RegisterUserRequest request);
     LoginResponse login(LoginRequest request);
     boolean hasRole(RoleType... requiredRoles);
+    UserDTO fetchMe();
 }

@@ -11,10 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static hackathon.security.utils.Constants.API_ROUTE;
 
@@ -40,5 +37,11 @@ public class AuthController {
         LoginResponse response = authService.login(request);
         ResponseCookie cookie = jwtUtils.createJwtCookie(response.getAccessToken());
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).body(response);
+    }
+
+    @GetMapping("fetchMe")
+    public ResponseEntity<UserDTO> fetchMe() {
+        log.info("Fetching me");
+        return ResponseEntity.ok(authService.fetchMe());
     }
 }

@@ -25,6 +25,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static hackathon.security.utils.Constants.API_ROUTE;
+
 
 @Configuration
 @EnableWebSecurity
@@ -63,9 +65,9 @@ public class WebSecurityConfig {
                         })
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("api/auth/login").permitAll()
-                        .requestMatchers("api/auth/logout").permitAll()
-                        .requestMatchers("api/auth/register").permitAll()
+                        .requestMatchers(API_ROUTE + "/auth/login").permitAll()
+                        .requestMatchers(API_ROUTE +"/auth/logout").permitAll()
+                        .requestMatchers(API_ROUTE +"/auth/register").permitAll()
                         .anyRequest().authenticated());
 
         http.addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class);
