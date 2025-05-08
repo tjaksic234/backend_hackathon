@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MenuDTO {
+    private String cafeteriaId;
     private String name;
     private MenuType menuType;
     private LocalDate date;

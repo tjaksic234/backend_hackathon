@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateMenuRequest {
+    private String cafeteriaId;
     private String name;
     private MenuType menuType;
     private LocalDate date;

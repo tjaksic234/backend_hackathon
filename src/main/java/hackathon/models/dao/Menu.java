@@ -22,6 +22,8 @@ public class Menu {
     @Id
     private String id;
 
+    private String cafeteriaId;
+
     private String name;
 
     private MenuType menuType;

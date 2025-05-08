@@ -5,6 +5,7 @@ import hackathon.exceptions.NotFoundException;
 import hackathon.models.dao.Menu;
 import hackathon.models.dto.CreateMenuRequest;
 import hackathon.models.dto.MenuDTO;
+import hackathon.repository.CafeteriaRepository;
 import hackathon.repository.FoodRepository;
 import hackathon.repository.MenuRepository;
 import hackathon.services.MenuService;
@@ -26,10 +27,15 @@ public class MenuServiceImpl implements MenuService {
 
     private final FoodRepository foodRepository;
 
+    private final CafeteriaRepository cafeteriaRepository;
+
     private final ConverterService converterService;
 
     @Override
     public MenuDTO createMenu(CreateMenuRequest request) {
+        cafeteriaRepository.findById(request.getCafeteriaId())
+                .orElseThrow(() -> new NotFoundException("Cafeteria not found"));
+
         List<String> validFoodIds = Arrays.stream(request.getFoodIds())
                 .filter(id -> foodRepository.findFoodById(id) != null)
                 .toList();
@@ -39,6 +45,7 @@ public class MenuServiceImpl implements MenuService {
         }
 
         Menu menu = new Menu();
+        menu.setCafeteriaId(request.getCafeteriaId());
         menu.setName(request.getName());
         menu.setMenuType(request.getMenuType());
         menu.setDate(request.getDate());

@@ -42,6 +42,7 @@ public class ConverterServiceImpl implements ConverterService {
     @Override
     public MenuDTO convertMenuToMenuDTO(Menu menu) {
         MenuDTO menuDTO = new MenuDTO();
+        menuDTO.setCafeteriaId(menu.getCafeteriaId());
         menuDTO.setName(menu.getName());
         menuDTO.setMenuType(menu.getMenuType());
         menuDTO.setDate(menu.getDate());
