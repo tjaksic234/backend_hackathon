@@ -9,14 +9,20 @@ import hackathon.models.dto.CafeteriaDTO;
 import hackathon.models.dto.FoodDTO;
 import hackathon.models.dto.MenuDTO;
 import hackathon.models.dto.UserDTO;
+import hackathon.repository.FoodRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor
 @Slf4j
 public class ConverterServiceImpl implements ConverterService {
+
+    private final FoodRepository foodRepository;
 
     @Override
     public UserDTO convertUserToUserDTO(User user) {
@@ -47,6 +53,14 @@ public class ConverterServiceImpl implements ConverterService {
         menuDTO.setMenuType(menu.getMenuType());
         menuDTO.setDate(menu.getDate());
         menuDTO.setFoodIds(menu.getFoodIds());
+
+        List<FoodDTO> foodDTOs = menu.getFoodIds().stream()
+                .map(foodId -> foodRepository.findById(foodId)
+                        .map(this::convertFoodToFoodDTO)
+                        .orElse(null))
+                .filter(Objects::nonNull)
+                .toList();
+        menuDTO.setFoodDetails(foodDTOs);
         return menuDTO;
     }
 
