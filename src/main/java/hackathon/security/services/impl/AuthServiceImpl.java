@@ -4,13 +4,11 @@ import hackathon.converters.ConverterService;
 import hackathon.exceptions.BadRequestException;
 import hackathon.exceptions.NotFoundException;
 import hackathon.models.dao.User;
-import hackathon.models.dto.LoginRequest;
-import hackathon.models.dto.LoginResponse;
-import hackathon.models.dto.RegisterUserRequest;
-import hackathon.models.dto.UserDTO;
+import hackathon.models.dto.*;
 import hackathon.models.enums.RoleType;
 import hackathon.repository.UserRepository;
 import hackathon.security.services.AuthService;
+import hackathon.security.utils.Helper;
 import hackathon.security.utils.JwtUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,6 +48,9 @@ public class AuthServiceImpl implements AuthService {
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRoles(List.of(RoleType.STUDENT));
+        UserInfo userInfo = Helper.extractUserInfoFromEmail(user.getEmail());
+        user.setFirstName(userInfo.getFirstName());
+        user.setLastName(userInfo.getLastName());
 
         userRepository.save(user);
 

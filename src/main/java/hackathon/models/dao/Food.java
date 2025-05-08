@@ -1,9 +1,7 @@
 package hackathon.models.dao;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import hackathon.models.enums.RoleType;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import hackathon.models.enums.Allergy;
+import hackathon.models.enums.FoodType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,34 +11,21 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-@Document(collection = "users")
+@Document(collection = "food")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Food {
+
     @Id
     private String id;
 
-    @Email
-    @NotBlank
-    private String email;
+    private String name;
 
-    @NotBlank
-    @JsonIgnore
-    private String password;
+    private Allergy[] allergies;
 
-    @NotBlank
-    private String firstName;
-
-    @NotBlank
-    private String lastName;
-
-    @NotBlank
-    private List<RoleType> roles;
-
-    private String photoUrl;
+    private FoodType foodType;
 
     @CreatedDate
     private LocalDateTime createdAt;
