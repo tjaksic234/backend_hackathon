@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static hackathon.security.utils.Constants.API_ROUTE;
+
 @RestController
-@RequestMapping("api/posts")
+@RequestMapping(API_ROUTE + "/posts")
 @Slf4j
 @AllArgsConstructor
 public class PostController {
